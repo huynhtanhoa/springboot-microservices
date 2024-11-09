@@ -1,6 +1,7 @@
 package com.steven.springboot.controller;
 
 
+import com.steven.springboot.dto.UserDTO;
 import com.steven.springboot.entity.User;
 import com.steven.springboot.services.UserService;
 import lombok.AllArgsConstructor;
@@ -18,31 +19,31 @@ public class UserController {
     private UserService userService;
 
     @PostMapping()
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User savedUser = userService.createUser(user);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user){
+        UserDTO savedUserDTO = userService.createUser(user);
+        return new ResponseEntity<>(savedUserDTO, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id){
-        User savedUser = userService.getUserById(id);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id){
+        UserDTO savedUser = userService.getUserById(id);
         return new ResponseEntity<>(savedUser, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User> listUsers = userService.getAllUser();
+    public ResponseEntity<List<UserDTO>> getAllUsers(){
+        List<UserDTO> listUsers = userService.getAllUser();
 
         return new ResponseEntity<>(listUsers, HttpStatus.OK);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id,
-                                           @RequestBody User user){
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id,
+                                           @RequestBody UserDTO user){
         user.setId(id);
-        User updatedUser = userService.updateUser(user);
+        UserDTO updatedUserDTO = userService.updateUser(user);
 
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        return new ResponseEntity<>(updatedUserDTO, HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
